@@ -75,17 +75,17 @@ function CreateProduct() {
     const [productList, setProductList] = useState([]);
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoicenodejs.herokuapp.com/foodgroup');
+        const response = await Axios('https://foodchoiceserver.herokuapp.com/foodgroup');
         setOptionFoodGroup(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoicenodejs.herokuapp.com/packageunit');
+        const response = await Axios('https://foodchoiceserver.herokuapp.com/packageunit');
         setOptionPackageUnit(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoicenodejs.herokuapp.com/packageperunit');
+        const response = await Axios('https://foodchoiceserver.herokuapp.com/packageperunit');
         setOptionPackagePerServingSize(response.data)
     }, [])
 
@@ -95,7 +95,7 @@ function CreateProduct() {
         setFoodGroupId(SubmitFoodGroupId)
         // const selectedIndex = e.target.options.selectedIndex
         // const group_name = e.target.options[selectedIndex].getAttribute('name')
-        Axios.get('https://foodchoicenodejs.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
+        Axios.get('https://foodchoiceserver.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
             setOptionFoodGroupSub(response.data)
         })
     }  
@@ -540,7 +540,7 @@ function CreateProduct() {
         // })
         console.log(name_th)
         console.log(name_en)
-        Axios.post('https://foodchoicenodejs.herokuapp.com/add', {
+        Axios.post('https://foodchoiceserver.herokuapp.com/add', {
                 name_th: name_th,
                 name_en: name_en,
                 // foodGroupId: foodGroupId,
