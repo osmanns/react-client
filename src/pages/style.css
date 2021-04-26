@@ -1,0 +1,14 @@
+.contrainer {
+    padding: 0;
+    margin: 0;
+}
+.product-title {
+    padding: 1rem;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--text-dark-color);
+}
+.product-contrainer {
+    display: flex;
+    padding: .5rem 1rem 1rem 1rem;
+}
