@@ -812,7 +812,7 @@ function CreateProduct() {
                                                         type="text" 
                                                         className="create-feild-input" 
                                                         onChange={(e) => {setQuantity(e.target.value)}}
-                                                        disabled={disabled}
+                                                        // disabled={disabled}
                                                         required 
                                                     />
                                                     <span className="create-feild-unit">{servingSizeUnit}</span>
