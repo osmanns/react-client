@@ -545,13 +545,6 @@ function CreateProduct() {
         console.log(name_th)
         console.log(name_en)
         Axios.post('https://foodchoiceserver.herokuapp.com/add', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                // "Authorization": "Bearer " + token,
-                "Access-Control-Allow-Methods": "POST",
-                "Access-Control-Allow-Origin": "*",
-            },
             name_th: name_th,
             name_en: name_en,
             // foodGroupId: foodGroupId,
