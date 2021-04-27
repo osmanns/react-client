@@ -176,6 +176,7 @@ function CreateProduct() {
     const [CalculateDisabled, setCalculateDisabled] = useState(true);
     const [inputServingPerContrainer, setInputServingPerContrainer] = useState();
     const [CalculateValue, setCalculateValue] = useState();
+    const [servingPerContrainerText, setServingPerContrainerText] = useState("");
 
     const HandleServingSize = (e) => {
 
@@ -276,6 +277,17 @@ function CreateProduct() {
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) : ", servingsizeWeightValue)
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) ปัดเศษ : ", servingsizeRouding)
 
+                if(servingPerContrainerValueRounding == servingPerContrainerRouding) {
+                    setServingPerContrainerText("")
+                }
+                else if(servingPerContrainerRouding == 1) {
+                    setServingPerContrainerText("")
+                }
+                else {
+                    setServingPerContrainerText("ประมาณ ")
+                }
+                console.log(servingPerContrainerText)
+
             }  
             else if(servingPerContrainerValueRounding >= 2 && servingPerContrainerValueRounding <= 5) {
     
@@ -308,6 +320,17 @@ function CreateProduct() {
                 setVOLUME(servingsizeRouding)
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) : ", servingsizeWeightValue)
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) ปัดเศษ : ", servingsizeRouding)
+
+                if(servingPerContrainerValueRounding == servingPerContrainerRouding) {
+                    setServingPerContrainerText("")
+                }
+                else if(servingPerContrainerRouding == 1) {
+                    setServingPerContrainerText("")
+                }
+                else {
+                    setServingPerContrainerText("ประมาณ ")
+                }
+                console.log(servingPerContrainerText)
             }
             else {
     
@@ -346,6 +369,17 @@ function CreateProduct() {
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) : ", servingsizeWeightValue)
                 console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) ปัดเศษ : ", servingsizeRouding)
             }
+
+            if(servingPerContrainerValueRounding == servingPerContrainerRouding) {
+                setServingPerContrainerText("")
+            }
+            else if(servingPerContrainerRouding == 1) {
+                setServingPerContrainerText("")
+            }
+            else {
+                setServingPerContrainerText("ประมาณ ")
+            }
+            console.log(servingPerContrainerText)
         }
         else if(calculateId == "custom") {
             changeDisabled = false
@@ -1420,7 +1454,7 @@ function CreateProduct() {
                                                 หนึ่งหน่วยบริโภค : {servingSize} {packageServingsize} <span>(</span>{servingSizeWeight} {servingSizeUnit}<span>)</span>
                                             </div>
                                             <div className="create-label-product-servingpercontrainer">
-                                                จำนวนหน่วยบริโภคต่อ<span>{packageUnit}</span> : <span>{servingPerContrainer}</span>
+                                                จำนวนหน่วยบริโภคต่อ<span>{packageUnit}</span> : <span>{servingPerContrainerText}</span><span>{servingPerContrainer}</span>
                                             </div>
                                                     
                                             <hr className="line" />
