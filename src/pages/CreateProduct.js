@@ -472,7 +472,7 @@ function CreateProduct() {
            e.preventDefault();
             // Axios.post('http://localhost:3001/add', {
             // Axios.post('http://localhost:4000/products/CreateProduct', {
-            Axios.post('http://foodch.kaseamsanth.tk/api/gda', {
+            Axios.post('https://foodch.kaseamsanth.tk/api/gda', {
                 volume: volume,
                 TOTAL_ENERGY: TOTAL_ENERGY,
                 ENERGY_FROM_FAT: ENERGY_FROM_FAT,
@@ -693,9 +693,9 @@ function CreateProduct() {
                                         <div className="create-feild">
                                             <label>จำนวนหน่วยบริโภค</label>
                                             <div className="create-feild-servingspercontainer">       
-                                                <input type="radio" id="auto" name="gender" value="auto" onClick={HandleServingSize}/>
+                                                <input type="radio" id="auto" value="auto" onClick={HandleServingSize}/>
                                                 <label for="auto">คำนวณจากหน่วยอ้างอิง</label>
-                                                <input type="radio" id="custom" name="gender" value="custom" onClick={HandleServingSize}/>
+                                                <input type="radio" id="custom" value="custom" onClick={HandleServingSize} disabled/>
                                                 <label for="custom">กำหนดเอง</label>
                                                 <input 
                                                     type="text" 
@@ -705,9 +705,9 @@ function CreateProduct() {
                                                     onChange={(e) => {setInputServingPerContrainer(e.target.value)}}
                                                     required
                                                 />
-                                                <div className="create-feild-servingspercontainer-recommend">
+                                                {/* <div className="create-feild-servingspercontainer-recommend">
                                                     <p>(เช่น 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7, 8, ...)</p>
-                                                </div>
+                                                </div> */}
                                             </div> 
                                         </div>
 
