@@ -545,37 +545,44 @@ function CreateProduct() {
         console.log(name_th)
         console.log(name_en)
         Axios.post('https://foodchoiceserver.herokuapp.com/add', {
-             name_th: name_th,
-             name_en: name_en,
-             // foodGroupId: foodGroupId,
-             // foodGroupsubId: foodGroupsubId,
-             // packageUnitId: packageUnitId,
-             // packageServingsizeId: packageServingsizeId,
-             // quantity: quantity,
-             // TOTAL_ENERGY: TOTAL_ENERGY,
-             // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
-             // TOTAL_FAT: TOTAL_FAT,
-             // SATURATED_FAT: SATURATED_FAT,
-             // CHOLESTEROL: CHOLESTEROL,
-             // TOTAL_PROTEIN: TOTAL_PROTEIN,
-             // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
-             // TOTAL_SUGAR: TOTAL_SUGAR,
-             // DIETARY_FIBER: DIETARY_FIBER,
-             // SODIUM: SODIUM,
-             // CALCIUM: CALCIUM,
-             // VITAMIN_A: VITAMIN_A,
-             // VITAMIN_B1: VITAMIN_B1,
-             // VITAMIN_B2: VITAMIN_B2,
-             // IRON: IRON,
-     }).then((response) => {
-         setProductList([...productList,
-             {
-                 name_th: name_th,
-                 name_en: name_en,
-             }
-         ])
-         console.log(response.data)
-     })
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // "Authorization": "Bearer " + token,
+                "Access-Control-Allow-Methods": "POST",
+                "Access-Control-Allow-Origin": "*",
+            },
+            name_th: name_th,
+            name_en: name_en,
+            // foodGroupId: foodGroupId,
+            // foodGroupsubId: foodGroupsubId,
+            // packageUnitId: packageUnitId,
+            // packageServingsizeId: packageServingsizeId,
+            // quantity: quantity,
+            // TOTAL_ENERGY: TOTAL_ENERGY,
+            // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
+            // TOTAL_FAT: TOTAL_FAT,
+            // SATURATED_FAT: SATURATED_FAT,
+            // CHOLESTEROL: CHOLESTEROL,
+            // TOTAL_PROTEIN: TOTAL_PROTEIN,
+            // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
+            // TOTAL_SUGAR: TOTAL_SUGAR,
+            // DIETARY_FIBER: DIETARY_FIBER,
+            // SODIUM: SODIUM,
+            // CALCIUM: CALCIUM,
+            // VITAMIN_A: VITAMIN_A,
+            // VITAMIN_B1: VITAMIN_B1,
+            // VITAMIN_B2: VITAMIN_B2,
+            // IRON: IRON,
+    }).then((response) => {
+        setProductList([...productList,
+            {
+                name_th: name_th,
+                name_en: name_en,
+            }
+        ])
+        console.log(response.data)
+    })
  }
    
 
