@@ -472,106 +472,107 @@ function CreateProduct() {
            e.preventDefault();
             // Axios.post('http://localhost:3001/add', {
             // Axios.post('http://localhost:4000/products/CreateProduct', {
-        //     Axios.post('http://foodch.kaseamsanth.tk/api/gda', {
-        //         volume: volume,
-        //         TOTAL_ENERGY: TOTAL_ENERGY,
-        //         ENERGY_FROM_FAT: ENERGY_FROM_FAT,
-        //         TOTAL_FAT: TOTAL_FAT,
-        //         SATURATED_FAT: SATURATED_FAT,
-        //         CHOLESTEROL: CHOLESTEROL,
-        //         TOTAL_PROTEIN: TOTAL_PROTEIN,
-        //         TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
-        //         TOTAL_SUGAR: TOTAL_SUGAR,
-        //         DIETARY_FIBER: DIETARY_FIBER,
-        //         SODIUM: SODIUM,
-        //         CALCIUM: CALCIUM,
-        //         VITAMIN_A: VITAMIN_A,
-        //         VITAMIN_B1: VITAMIN_B1,
-        //         VITAMIN_B2: VITAMIN_B2,
-        //         IRON: IRON,
-        // }).then((response) => {
-        //     setProductList([...productList, {
-        //         volume: volume,
-        //         TOTAL_ENERGY: TOTAL_ENERGY,
-        //         ENERGY_FROM_FAT: ENERGY_FROM_FAT,
-        //         TOTAL_FAT: TOTAL_FAT,
-        //         SATURATED_FAT: SATURATED_FAT,
-        //         CHOLESTEROL: CHOLESTEROL,
-        //         TOTAL_PROTEIN: TOTAL_PROTEIN,
-        //         TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
-        //         TOTAL_SUGAR: TOTAL_SUGAR,
-        //         DIETARY_FIBER: DIETARY_FIBER,
-        //         SODIUM: SODIUM,
-        //         CALCIUM: CALCIUM,
-        //         VITAMIN_A: VITAMIN_A,
-        //         VITAMIN_B1: VITAMIN_B1,
-        //         VITAMIN_B2: VITAMIN_B2,
-        //         IRON: IRON,
-        //     }
-        // ])
-        //     console.log(response.data)
-        //     setTOTAL_ENERGY_PERSERVING(response.data.TOTAL_ENERGY.per_serving)
-        //     setENERGY_FROM_FAT_PERSERVING(response.data.ENERGY_FROM_FAT.per_serving)
-        //     setTOTAL_FAT_PERSERVING(response.data.TOTAL_FAT.per_serving)
-        //     setTOTAL_FAT_PERCENTAGE(response.data.TOTAL_FAT.thai_rdi_per_serving)
-        //     setSATURATED_FAT_PERSERVING(response.data.SATURATED_FAT.per_serving)
-        //     setSATURATED_FAT_PERCENTAGE(response.data.SATURATED_FAT.thai_rdi_per_serving)
-        //     setCHOLESTEROL_PERSERVING(response.data.CHOLESTEROL.per_serving)
-        //     setCHOLESTEROL_PERCENTAGE(response.data.CHOLESTEROL.thai_rdi_per_serving)
-        //     setTOTAL_PROTEIN_PERSERVING(response.data.TOTAL_PROTEIN.per_serving)
-        //     setTOTAL_CARBOHYDRATES_PERSERVING(response.data.TOTAL_CARBOHYDRATES.per_serving)
-        //     setTOTAL_CARBOHYDRATES_PERCENTAGE(response.data.TOTAL_CARBOHYDRATES.thai_rdi_per_serving)
-        //     setTOTAL_SUGAR_PERSERVING(response.data.TOTAL_SUGAR.per_serving)
-        //     setDIETARY_FIBER_PERSERVING(response.data.DIETARY_FIBER.per_serving)
-        //     setDIETARY_FIBER_PERCENTAGE(response.data.DIETARY_FIBER.thai_rdi_per_serving)
-        //     setSODIUM_PERSERVING(response.data.SODIUM.per_serving)
-        //     setSODIUM_PERCENTAGE(response.data.SODIUM.thai_rdi_per_serving)
-
-        //     // var CALCIUM = response.data.CALCIUM.per_serving
-        //     // var CALCIUM_parseInt = parseInt(CALCIUM)
-        //     // var CALCIUM_PERSERVING = Number(CALCIUM_parseInt.toFixed(0));
-        //     // console.log(CALCIUM_PERSERVING)
-
-        //     setCALCIUM_PERSERVING(CALCIUM)
-        //     setVITAMIN_A_PERSERVING(response.data.VITAMIN_A.per_serving)
-        //     setVITAMIN_B1_PERSERVING(response.data.VITAMIN_B1.per_serving)
-        //     setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.per_serving)
-        //     setIRON_PERSERVING(response.data.IRON.per_serving)
-        // })
-        console.log(name_th)
-        console.log(name_en)
-        Axios.post('https://foodchoiceserver.herokuapp.com/add', {
-                name_th: name_th,
-                name_en: name_en,
-                // foodGroupId: foodGroupId,
-                // foodGroupsubId: foodGroupsubId,
-                // packageUnitId: packageUnitId,
-                // packageServingsizeId: packageServingsizeId,
-                // quantity: quantity,
-                // TOTAL_ENERGY: TOTAL_ENERGY,
-                // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
-                // TOTAL_FAT: TOTAL_FAT,
-                // SATURATED_FAT: SATURATED_FAT,
-                // CHOLESTEROL: CHOLESTEROL,
-                // TOTAL_PROTEIN: TOTAL_PROTEIN,
-                // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
-                // TOTAL_SUGAR: TOTAL_SUGAR,
-                // DIETARY_FIBER: DIETARY_FIBER,
-                // SODIUM: SODIUM,
-                // CALCIUM: CALCIUM,
-                // VITAMIN_A: VITAMIN_A,
-                // VITAMIN_B1: VITAMIN_B1,
-                // VITAMIN_B2: VITAMIN_B2,
-                // IRON: IRON,
+            Axios.post('http://foodch.kaseamsanth.tk/api/gda', {
+                volume: volume,
+                TOTAL_ENERGY: TOTAL_ENERGY,
+                ENERGY_FROM_FAT: ENERGY_FROM_FAT,
+                TOTAL_FAT: TOTAL_FAT,
+                SATURATED_FAT: SATURATED_FAT,
+                CHOLESTEROL: CHOLESTEROL,
+                TOTAL_PROTEIN: TOTAL_PROTEIN,
+                TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
+                TOTAL_SUGAR: TOTAL_SUGAR,
+                DIETARY_FIBER: DIETARY_FIBER,
+                SODIUM: SODIUM,
+                CALCIUM: CALCIUM,
+                VITAMIN_A: VITAMIN_A,
+                VITAMIN_B1: VITAMIN_B1,
+                VITAMIN_B2: VITAMIN_B2,
+                IRON: IRON,
         }).then((response) => {
-            setProductList([...productList,
-                {
-                    name_th: name_th,
-                    name_en: name_en,
-                }
-            ])
+            setProductList([...productList, {
+                volume: volume,
+                TOTAL_ENERGY: TOTAL_ENERGY,
+                ENERGY_FROM_FAT: ENERGY_FROM_FAT,
+                TOTAL_FAT: TOTAL_FAT,
+                SATURATED_FAT: SATURATED_FAT,
+                CHOLESTEROL: CHOLESTEROL,
+                TOTAL_PROTEIN: TOTAL_PROTEIN,
+                TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
+                TOTAL_SUGAR: TOTAL_SUGAR,
+                DIETARY_FIBER: DIETARY_FIBER,
+                SODIUM: SODIUM,
+                CALCIUM: CALCIUM,
+                VITAMIN_A: VITAMIN_A,
+                VITAMIN_B1: VITAMIN_B1,
+                VITAMIN_B2: VITAMIN_B2,
+                IRON: IRON,
+            }
+        ])
             console.log(response.data)
+            setTOTAL_ENERGY_PERSERVING(response.data.TOTAL_ENERGY.per_serving)
+            setENERGY_FROM_FAT_PERSERVING(response.data.ENERGY_FROM_FAT.per_serving)
+            setTOTAL_FAT_PERSERVING(response.data.TOTAL_FAT.per_serving)
+            setTOTAL_FAT_PERCENTAGE(response.data.TOTAL_FAT.thai_rdi_per_serving)
+            setSATURATED_FAT_PERSERVING(response.data.SATURATED_FAT.per_serving)
+            setSATURATED_FAT_PERCENTAGE(response.data.SATURATED_FAT.thai_rdi_per_serving)
+            setCHOLESTEROL_PERSERVING(response.data.CHOLESTEROL.per_serving)
+            setCHOLESTEROL_PERCENTAGE(response.data.CHOLESTEROL.thai_rdi_per_serving)
+            setTOTAL_PROTEIN_PERSERVING(response.data.TOTAL_PROTEIN.per_serving)
+            setTOTAL_CARBOHYDRATES_PERSERVING(response.data.TOTAL_CARBOHYDRATES.per_serving)
+            setTOTAL_CARBOHYDRATES_PERCENTAGE(response.data.TOTAL_CARBOHYDRATES.thai_rdi_per_serving)
+            setTOTAL_SUGAR_PERSERVING(response.data.TOTAL_SUGAR.per_serving)
+            setDIETARY_FIBER_PERSERVING(response.data.DIETARY_FIBER.per_serving)
+            setDIETARY_FIBER_PERCENTAGE(response.data.DIETARY_FIBER.thai_rdi_per_serving)
+            setSODIUM_PERSERVING(response.data.SODIUM.per_serving)
+            setSODIUM_PERCENTAGE(response.data.SODIUM.thai_rdi_per_serving)
+
+            // var CALCIUM = response.data.CALCIUM.per_serving
+            // var CALCIUM_parseInt = parseInt(CALCIUM)
+            // var CALCIUM_PERSERVING = Number(CALCIUM_parseInt.toFixed(0));
+            // console.log(CALCIUM_PERSERVING)
+
+            setCALCIUM_PERSERVING(response.data.CALCIUM.per_serving)
+            setVITAMIN_A_PERSERVING(response.data.VITAMIN_A.per_serving)
+            setVITAMIN_B1_PERSERVING(response.data.VITAMIN_B1.per_serving)
+            setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.per_serving)
+            setIRON_PERSERVING(response.data.IRON.per_serving)
         })
+
+        // console.log(name_th)
+        // console.log(name_en)
+        // Axios.post('https://foodchoiceserver.herokuapp.com/add', {
+        //         name_th: name_th,
+        //         name_en: name_en,
+        //         // foodGroupId: foodGroupId,
+        //         // foodGroupsubId: foodGroupsubId,
+        //         // packageUnitId: packageUnitId,
+        //         // packageServingsizeId: packageServingsizeId,
+        //         // quantity: quantity,
+        //         // TOTAL_ENERGY: TOTAL_ENERGY,
+        //         // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
+        //         // TOTAL_FAT: TOTAL_FAT,
+        //         // SATURATED_FAT: SATURATED_FAT,
+        //         // CHOLESTEROL: CHOLESTEROL,
+        //         // TOTAL_PROTEIN: TOTAL_PROTEIN,
+        //         // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
+        //         // TOTAL_SUGAR: TOTAL_SUGAR,
+        //         // DIETARY_FIBER: DIETARY_FIBER,
+        //         // SODIUM: SODIUM,
+        //         // CALCIUM: CALCIUM,
+        //         // VITAMIN_A: VITAMIN_A,
+        //         // VITAMIN_B1: VITAMIN_B1,
+        //         // VITAMIN_B2: VITAMIN_B2,
+        //         // IRON: IRON,
+        // }).then((response) => {
+        //     setProductList([...productList,
+        //         {
+        //             name_th: name_th,
+        //             name_en: name_en,
+        //         }
+        //     ])
+        //     console.log(response.data)
+        // })
     
     }
 
