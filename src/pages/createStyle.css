@@ -104,6 +104,9 @@
     border-radius: 50%; */
     margin-right: 5px;
 }
+.create-feild-servingspercontainer label.not-allow {
+    cursor: not-allowed;
+}
 .create-feild-servingspercontainer label:hover {
     color: #ffffff;
     background-color:rgb(98, 170, 253);
@@ -400,10 +403,30 @@ button.button {
     justify-content: flex-end;
     padding: .75rem 0 .5rem 0;
 }
-button.button-calculate {
+button.button-reset {
     position: relative;
     padding: 7.5px 25px;
     margin-left: 30px;
+    border: none;
+    border-radius: .5rem;
+    font-size: 18px;
+    font-weight: 600;
+    font-weight: var(--font-semi-bold);
+    letter-spacing: 1px;
+    z-index: 1;
+    color: #ffffff;
+    cursor: pointer;
+    background: rgba(167, 171, 175, 0.8);
+}
+button.button-reset:hover {
+    color: #ffffff;
+    background: rgba(167, 171, 175, 0.8);
+    box-shadow: 0 0 4px rgb(80, 158, 247);
+}
+button.button-calculate {
+    position: relative;
+    padding: 7.5px 25px;
+    margin-left: 15px;
     border: none;
     border-radius: .5rem;
     font-size: 18px;
