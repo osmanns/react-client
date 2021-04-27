@@ -331,7 +331,7 @@
     color: #009efa;
 }
 .create-label-percentage {
-    width: 30px;
+    width: 40px;
     padding-right: 5px;
     text-align: right;
     font-size: var(--normal-font-size);
@@ -345,7 +345,15 @@
 
 }
 .create-label-nutrition-box .create-label-nutrition-name {
-    width: calc(60%) !important;
+    width: calc(40%) !important;
+}
+.create-label-nutrition-box .create-label-percentage {
+    width: 80px;
+    padding-right: 5px;
+    text-align: right;
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: #009efa;
 }
 .create-label-unit {
     margin-right: .35rem;

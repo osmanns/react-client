@@ -468,6 +468,7 @@ function CreateProduct() {
     }
     
     // ! ========================================= Role : บันทึกข้อมูล
+    const [perserving_text, setPerserving_text] = useState("น้อยกว่า ")
     const create_calculate = (e) => {
            e.preventDefault();
             // Axios.post('http://localhost:3001/add', {
@@ -527,16 +528,109 @@ function CreateProduct() {
             setSODIUM_PERSERVING(response.data.SODIUM.per_serving)
             setSODIUM_PERCENTAGE(response.data.SODIUM.thai_rdi_per_serving)
 
-            // var CALCIUM = response.data.CALCIUM.per_serving
-            // var CALCIUM_parseInt = parseInt(CALCIUM)
-            // var CALCIUM_PERSERVING = Number(CALCIUM_parseInt.toFixed(0));
-            // console.log(CALCIUM_PERSERVING)
+            var CALCIUM = response.data.CALCIUM.per_serving
+            var CALCIUM_parseInt = Number(CALCIUM)
+            var CALCIUM_PERSERVING = Number(CALCIUM_parseInt.toFixed(0));
+            console.log(CALCIUM)
+            console.log(CALCIUM_parseInt)
+            console.log(CALCIUM_PERSERVING)
+            if(CALCIUM_PERSERVING < 0.15){
+                CALCIUM_PERSERVING = 0
+            }
+            else if(CALCIUM_PERSERVING >= 1.5 && CALCIUM_PERSERVING < 2){
+                CALCIUM_PERSERVING = 2
+            }
+            else if(CALCIUM_PERSERVING >= 2 && CALCIUM_PERSERVING < 10){
+                Math.round()
+            }
+            else if(CALCIUM_PERSERVING >= 10 && CALCIUM_PERSERVING < 50){
 
-            setCALCIUM_PERSERVING(response.data.CALCIUM.per_serving)
-            setVITAMIN_A_PERSERVING(response.data.VITAMIN_A.per_serving)
-            setVITAMIN_B1_PERSERVING(response.data.VITAMIN_B1.per_serving)
-            setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.per_serving)
-            setIRON_PERSERVING(response.data.IRON.per_serving)
+            }
+            else {
+
+            }
+
+            var VITAMIN_A = response.data.VITAMIN_A.per_serving
+            var VITAMIN_A_parseInt = Number(VITAMIN_A)
+            var VITAMIN_A_PERSERVING = Number(VITAMIN_A_parseInt.toFixed(0));
+            if(VITAMIN_A_PERSERVING < 0.15){
+                CALCIUM_PERSERVING = 0
+            }
+            else if(VITAMIN_A_PERSERVING >= 1.5 && VITAMIN_A_PERSERVING < 2){
+                VITAMIN_A_PERSERVING = 2
+            }
+            else if(VITAMIN_A_PERSERVING >= 2 && VITAMIN_A_PERSERVING < 10){
+                Math.round()
+            }
+            else if(VITAMIN_A_PERSERVING >= 10 && VITAMIN_A_PERSERVING < 50){
+
+            }
+            else {
+
+            }
+
+            var VITAMIN_B1 = response.data.VITAMIN_B1.per_serving
+            var VITAMIN_B1_parseInt = Number(VITAMIN_B1)
+            var VITAMIN_B1_PERSERVING = Number(VITAMIN_B1_parseInt.toFixed(0));
+            if(VITAMIN_B1_PERSERVING < 0.15){
+                CALCIUM_PERSERVING = 0
+            }
+            else if(VITAMIN_B1_PERSERVING >= 1.5 && VITAMIN_B1_PERSERVING < 2){
+                VITAMIN_B1_PERSERVING = 2
+            }
+            else if(VITAMIN_B1_PERSERVING >= 2 && VITAMIN_B1_PERSERVING < 10){
+                Math.round()
+            }
+            else if(VITAMIN_B1_PERSERVING >= 10 && VITAMIN_B1_PERSERVING < 50){
+
+            }
+            else {
+
+            }
+
+            var VITAMIN_B2 = response.data.VITAMIN_B2.per_serving
+            var VITAMIN_B2_parseInt = Number(VITAMIN_B2)
+            var VITAMIN_B2_PERSERVING = Number(VITAMIN_B2_parseInt.toFixed(0));
+            if(VITAMIN_B2_PERSERVING < 0.15){
+                VITAMIN_B2_PERSERVING = 0
+            }
+            else if(VITAMIN_B2_PERSERVING >= 1.5 && VITAMIN_B2_PERSERVING < 2){
+                VITAMIN_B2_PERSERVING = 2
+            }
+            else if(VITAMIN_B2_PERSERVING >= 2 && VITAMIN_B2_PERSERVING < 10){
+                Math.round()
+            }
+            else if(VITAMIN_B2_PERSERVING >= 10 && VITAMIN_B2_PERSERVING < 50){
+
+            }
+            else {
+
+            }
+
+            var IRON = response.data.IRON.per_serving
+            var IRON_parseInt = Number(IRON)
+            var IRON_PERSERVING = Number(IRON_parseInt.toFixed(0));
+            if(IRON_PERSERVING < 0.15){
+                IRON_PERSERVING = 0
+            }
+            else if(IRON_PERSERVING >= 1.5 && IRON_PERSERVING < 2){
+                IRON_PERSERVING = 2
+            }
+            else if(IRON_PERSERVING >= 2 && IRON_PERSERVING < 10){
+                Math.round()
+            }
+            else if(IRON_PERSERVING >= 10 && IRON_PERSERVING < 50){
+
+            }
+            else {
+
+            }
+
+            setCALCIUM_PERSERVING(VITAMIN_A_PERSERVING)
+            setVITAMIN_A_PERSERVING(VITAMIN_A_PERSERVING)
+            setVITAMIN_B1_PERSERVING(VITAMIN_B1_PERSERVING)
+            setVITAMIN_B2_PERSERVING(VITAMIN_B2_PERSERVING)
+            setIRON_PERSERVING(IRON_PERSERVING)
         })
     }
 
