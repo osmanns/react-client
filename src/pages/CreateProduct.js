@@ -468,7 +468,7 @@ function CreateProduct() {
     }
     
     // ! ========================================= Role : บันทึกข้อมูล
-    const create_submit = (e) => {
+    const create_calculate = (e) => {
            e.preventDefault();
             // Axios.post('http://localhost:3001/add', {
             // Axios.post('http://localhost:4000/products/CreateProduct', {
@@ -538,44 +538,45 @@ function CreateProduct() {
             setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.per_serving)
             setIRON_PERSERVING(response.data.IRON.per_serving)
         })
-
-        // console.log(name_th)
-        // console.log(name_en)
-        // Axios.post('https://foodchoiceserver.herokuapp.com/add', {
-        //         name_th: name_th,
-        //         name_en: name_en,
-        //         // foodGroupId: foodGroupId,
-        //         // foodGroupsubId: foodGroupsubId,
-        //         // packageUnitId: packageUnitId,
-        //         // packageServingsizeId: packageServingsizeId,
-        //         // quantity: quantity,
-        //         // TOTAL_ENERGY: TOTAL_ENERGY,
-        //         // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
-        //         // TOTAL_FAT: TOTAL_FAT,
-        //         // SATURATED_FAT: SATURATED_FAT,
-        //         // CHOLESTEROL: CHOLESTEROL,
-        //         // TOTAL_PROTEIN: TOTAL_PROTEIN,
-        //         // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
-        //         // TOTAL_SUGAR: TOTAL_SUGAR,
-        //         // DIETARY_FIBER: DIETARY_FIBER,
-        //         // SODIUM: SODIUM,
-        //         // CALCIUM: CALCIUM,
-        //         // VITAMIN_A: VITAMIN_A,
-        //         // VITAMIN_B1: VITAMIN_B1,
-        //         // VITAMIN_B2: VITAMIN_B2,
-        //         // IRON: IRON,
-        // }).then((response) => {
-        //     setProductList([...productList,
-        //         {
-        //             name_th: name_th,
-        //             name_en: name_en,
-        //         }
-        //     ])
-        //     console.log(response.data)
-        // })
-    
     }
 
+    const create_submit = (e) => {
+        e.preventDefault();
+        console.log(name_th)
+        console.log(name_en)
+        Axios.post('https://foodchoiceserver.herokuapp.com/add', {
+             name_th: name_th,
+             name_en: name_en,
+             // foodGroupId: foodGroupId,
+             // foodGroupsubId: foodGroupsubId,
+             // packageUnitId: packageUnitId,
+             // packageServingsizeId: packageServingsizeId,
+             // quantity: quantity,
+             // TOTAL_ENERGY: TOTAL_ENERGY,
+             // ENERGY_FROM_FAT: ENERGY_FROM_FAT,
+             // TOTAL_FAT: TOTAL_FAT,
+             // SATURATED_FAT: SATURATED_FAT,
+             // CHOLESTEROL: CHOLESTEROL,
+             // TOTAL_PROTEIN: TOTAL_PROTEIN,
+             // TOTAL_CARBOHYDRATES: TOTAL_CARBOHYDRATES,
+             // TOTAL_SUGAR: TOTAL_SUGAR,
+             // DIETARY_FIBER: DIETARY_FIBER,
+             // SODIUM: SODIUM,
+             // CALCIUM: CALCIUM,
+             // VITAMIN_A: VITAMIN_A,
+             // VITAMIN_B1: VITAMIN_B1,
+             // VITAMIN_B2: VITAMIN_B2,
+             // IRON: IRON,
+     }).then((response) => {
+         setProductList([...productList,
+             {
+                 name_th: name_th,
+                 name_en: name_en,
+             }
+         ])
+         console.log(response.data)
+     })
+ }
    
 
     return (
@@ -1302,7 +1303,7 @@ function CreateProduct() {
                                             </div>
                                         </div> */}
                                         <div className="create-button">
-                                            <button onClick={create_submit} className="button-calculate">คำนวณ</button>
+                                            <button onClick={create_calculate} className="button-calculate">คำนวณ</button>
                                         </div>
                                     </div>
                                 </div>    
@@ -1493,6 +1494,9 @@ function CreateProduct() {
                                                 * ร้อยละของปริมาณสารอาหารที่แนะนำให้บริโภคต่อวันสำหรับคนไทยอายุตั้งแต่ 6 ปีขึ้นไป (Thai RDI) โดยคิดจากความต้องการพลังงานวันละ 2,000 กิโลแคลอรี่ 
                                             </div>
 
+                                        </div>
+                                        <div className="create-button">
+                                            <button onClick={create_submit} className="button-submit">บันทึก</button>
                                         </div>
                                     </div>
                                     

@@ -412,6 +412,26 @@ button.button-calculate:hover {
     box-shadow: 0 0 4px rgb(80, 158, 247);
 }
 
+button.button-submit {
+    position: relative;
+    padding: 7.5px 25px;
+    margin-left: 30px;
+    border: none;
+    border-radius: .5rem;
+    font-size: 18px;
+    font-weight: 600;
+    font-weight: var(--font-semi-bold);
+    letter-spacing: 1px;
+    z-index: 1;
+    color: #ffffff;
+    cursor: pointer;
+    background: rgba(51, 223, 94, 0.8);
+}
+button.button-submit:hover {
+    color: #ffffff;
+    background: rgba(37, 194, 76, 0.8);
+    box-shadow: 0 0 4px rgba(71, 211, 106, 0.8);
+}
 /* * ==================== Scroll Top ==================== */
 a#scroll-top ion-icon {
     font-size: 1.75rem;
