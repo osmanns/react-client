@@ -88,8 +88,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
-    padding: 5px;
+    font-size: .7rem;
+    font-weight: var(--font-semi-bold);
+    padding: 4px;
     margin-right: 5px;
     border-radius: .25rem;
     border: 1px solid rgb(80, 158, 247);
