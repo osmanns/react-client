@@ -52,17 +52,17 @@ function CreateProduct() {
     const [IRON, setIRON] = useState(); // เหล็ก
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/foodgroup');
+        const response = await Axios.get('https://foodchoicedata.herokuapp.com//foodgroup');
         setOptionFoodGroup(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/packageunit');
+        const response = await Axios.get('https://foodchoicedata.herokuapp.com/packageunit');
         setOptionPackageUnit(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/packageperunit');
+        const response = await Axios.get('https://foodchoicedata.herokuapp.com/packageperunit');
         setOptionPackagePerServingSize(response.data)
     }, [])
 
@@ -72,7 +72,7 @@ function CreateProduct() {
         setFoodGroupId(SubmitFoodGroupId)
         // const selectedIndex = e.target.options.selectedIndex
         // const group_name = e.target.options[selectedIndex].getAttribute('name')
-        Axios.get('https://foodchoiceserver.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
+        Axios.get('https://foodchoicedata.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
             setOptionFoodGroupSub(response.data)
         })
     }  
@@ -482,7 +482,7 @@ function CreateProduct() {
         console.log(TOTAL_ENERGY)
         // Axios.post('http://localhost:3001/add', {
         // Axios.post('http://localhost:4000/products/CreateProduct', {
-        Axios.post('https://foodchoiceserver.herokuapp.com/add', {
+        Axios.post('https://foodchoicedata.herokuapp.com/add', {
             name_th: name_th,
             name_en: name_en,
             // foodGroupId: foodGroupId,
