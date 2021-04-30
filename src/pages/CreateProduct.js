@@ -52,7 +52,7 @@ function CreateProduct() {
     const [IRON, setIRON] = useState(); // เหล็ก
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoicedata.herokuapp.com//foodgroup');
+        const response = await Axios.get('https://foodchoicedata.herokuapp.com/foodgroup');
         setOptionFoodGroup(response.data)
     }, [])
 
