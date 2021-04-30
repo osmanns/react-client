@@ -683,7 +683,7 @@ function CreateProduct() {
                                     </div>
 
                                     <div className="">
-                                    <form action="#" onSubmit={create_calculate}>
+                                    <form action="" onSubmit={create_calculate}>
 
                                         <div className="create-nutriiton-feild">
                                             <label>พลังงานทั้งหมด</label>
@@ -1061,11 +1061,11 @@ function CreateProduct() {
                                         </div>
                                     </div>         
                                 </div>
-                                <div className="create-contrainer-form-button">
+                                {/* <div className="create-contrainer-form-button">
                                     <div className="create-button-submit">
-                                        <button onClick={create_submit} className="button-submit">บันทึก</button>
+                                        <button className="button-submit">บันทึก</button>
                                     </div>
-                                </div>
+                                </div> */}
                                 
                             </div>
                         </div>
