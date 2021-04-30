@@ -107,7 +107,7 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
     }
     body {
-        font-family: var(--primary-font);
+        font-family: "Poppins", sans-serif;
         font-size: var(--normal-font-size);
         color: var(--text-dark-color);
     }

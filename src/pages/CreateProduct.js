@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Axios from "axios"
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+
 import style from "styled-components"
 
 import Layout from "../components/layout/Layout"
@@ -516,9 +519,16 @@ function CreateProduct() {
         })
     }
 
-    const [name, setName] = useState("");
-    const button_submit = (e) => {
-        console.log(TOTAL_ENERGY)
+    const button_image = () => {
+
+        htmlToImage.toJpeg(document.getElementById('download-label'), { quality: 0.95 })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'label.jpeg';
+            link.href = dataUrl;
+            link.click();
+        });
+
     }
    
     return (
@@ -883,7 +893,7 @@ function CreateProduct() {
                                     <p>การแสดงฉลากโภชนาการของผลิตภัณฑ์</p>
                                 </div>
 
-                                <div className="create-contrainer-label-product create-contrainer-form-box">
+                                <div className="create-contrainer-label-product create-contrainer-form-box" id="download-label">
                                     <div className="create-label-product-title">
                                         <div className="">ข้อมูลโภชนาการ</div>
                                     </div>
@@ -1062,11 +1072,14 @@ function CreateProduct() {
                                     </div>         
                                 </div>
 
-                                {/* <div className="create-contrainer-form-button">
-                                    <div className="create-button-submit">
+                                <div className="create-contrainer-form-button">
+                                    {/* <div className="create-button-submit">
                                         <button className="button-submit">บันทึก</button>
+                                    </div> */}
+                                    <div className="create-button-submit">
+                                        <button onClick={button_image} className="button-submit">ดาวน์โหลด</button>
                                     </div>
-                                </div> */}
+                                </div>
                                 
                             </div>
                         </div>
