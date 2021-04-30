@@ -52,17 +52,17 @@ function CreateProduct() {
     const [IRON, setIRON] = useState(); // เหล็ก
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoiceserver.herokuapp.com/foodgroup');
+        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/foodgroup');
         setOptionFoodGroup(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoiceserver.herokuapp.com/packageunit');
+        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/packageunit');
         setOptionPackageUnit(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios('https://foodchoiceserver.herokuapp.com/packageperunit');
+        const response = await Axios.get('https://foodchoiceserver.herokuapp.com/packageperunit');
         setOptionPackagePerServingSize(response.data)
     }, [])
 
@@ -1061,7 +1061,7 @@ function CreateProduct() {
                                         </div>
                                     </div>         
                                 </div>
-                                
+
                                 {/* <div className="create-contrainer-form-button">
                                     <div className="create-button-submit">
                                         <button className="button-submit">บันทึก</button>
