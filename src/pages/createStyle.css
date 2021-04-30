@@ -40,6 +40,12 @@
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
     background: var(--body-color);
 }
+.create-contrainer-form-button {
+    padding: .1rem 1.5rem;
+    margin: 0 .5rem .5rem .5rem;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+    background: var(--body-color);
+}
 
 .create-form-product-title, 
 .create-form-nutrition-title {
@@ -377,36 +383,18 @@
 
 
 
-
-
-
 /* * ====================== Button ====================== */
-button.button {
-    position: relative;
-    padding: 7.5px 25px;
-    margin-left: 10px;
-    border: none;
-    border-radius: .5rem;
-    font-size: 18px;
-    font-weight: 600;
-    font-weight: var(--font-semi-bold);
-    letter-spacing: 1px;
-    z-index: 1;
-    color: #ffffff;
-    cursor: pointer;
-    background: rgba(72, 149, 239, .8);
-}
 .create-button {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: .75rem 0 .5rem 0;
 }
 button.button-reset {
     position: relative;
     padding: 7.5px 25px;
-    margin-left: 30px;
+    margin-left: 2.5rem;
     border: none;
     border-radius: .5rem;
     font-size: 18px;
@@ -420,8 +408,8 @@ button.button-reset {
 }
 button.button-reset:hover {
     color: #ffffff;
-    background: rgba(167, 171, 175, 0.8);
-    box-shadow: 0 0 4px rgb(80, 158, 247);
+    background: rgba(136, 138, 141, 0.8);
+    box-shadow: 0 0 4px rgb(157, 160, 163);
 }
 button.button-calculate {
     position: relative;
@@ -443,7 +431,13 @@ button.button-calculate:hover {
     background: rgba(72, 149, 239, 1);
     box-shadow: 0 0 4px rgb(80, 158, 247);
 }
-
+.create-button-submit {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: .75rem 0 .5rem 0;
+}
 button.button-submit {
     position: relative;
     padding: 7.5px 25px;

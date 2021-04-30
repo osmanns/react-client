@@ -33,7 +33,6 @@ function CreateProduct() {
     const [packageUnitId, setPackageUnitId] = useState() // หน่วยบรรจุภัณฑ์
     const [packageServingsize, setPackageServingsize] = useState() // หน่วยบริโภค
     const [packageServingsizeId, setPackageServingsizeId] = useState() // หน่วยบริโภค (ไอดี)
-
     const [volume, setVOLUME] = useState(); // น้ำหนักสุทธิ
     const [TOTAL_ENERGY, setTOTAL_ENERGY] = useState(); // พลังงาน
     const [ENERGY_FROM_FAT, setENERGY_FROM_FAT] = useState(); // พลังงานจากไขมัน
@@ -50,6 +49,30 @@ function CreateProduct() {
     const [VITAMIN_B1, setVITAMIN_B1] = useState(); // วิตามินบี 1
     const [VITAMIN_B2, setVITAMIN_B2] = useState(); // วิตามินบี 2
     const [IRON, setIRON] = useState(); // เหล็ก
+
+    const [TOTAL_ENERGY_PERSERVING, setTOTAL_ENERGY_PERSERVING] = useState();
+    const [ENERGY_FROM_FAT_PERSERVING, setENERGY_FROM_FAT_PERSERVING] = useState();
+    const [TOTAL_FAT_PERSERVING, setTOTAL_FAT_PERSERVING] = useState();
+    const [TOTAL_FAT_PERCENTAGE, setTOTAL_FAT_PERCENTAGE] = useState();
+    const [SATURATED_FAT_PERSERVING, setSATURATED_FAT_PERSERVING] = useState();
+    const [SATURATED_FAT_PERCENTAGE, setSATURATED_FAT_PERCENTAGE] = useState();
+    const [CHOLESTEROL_PERSERVING, setCHOLESTEROL_PERSERVING] = useState();
+    const [CHOLESTEROL_PERCENTAGE, setCHOLESTEROL_PERCENTAGE] = useState();
+    const [TOTAL_PROTEIN_PERSERVING, setTOTAL_PROTEIN_PERSERVING] = useState();
+    const [TOTAL_CARBOHYDRATES_PERSERVING, setTOTAL_CARBOHYDRATES_PERSERVING] = useState();
+    const [TOTAL_CARBOHYDRATES_PERCENTAGE, setTOTAL_CARBOHYDRATES_PERCENTAGE] = useState();
+    const [TOTAL_SUGAR_PERSERVING, setTOTAL_SUGAR_PERSERVING] = useState();
+    const [DIETARY_FIBER_PERSERVING, setDIETARY_FIBER_PERSERVING] = useState();
+    const [DIETARY_FIBER_PERCENTAGE, setDIETARY_FIBER_PERCENTAGE] = useState();
+    const [SODIUM_PERSERVING, setSODIUM_PERSERVING] = useState();
+    const [SODIUM_PERCENTAGE, setSODIUM_PERCENTAGE] = useState();
+    const [CALCIUM_PERSERVING, setCALCIUM_PERSERVING] = useState();
+    const [VITAMIN_A_PERSERVING, setVITAMIN_A_PERSERVING] = useState();
+    const [VITAMIN_B1_PERSERVING, setVITAMIN_B1_PERSERVING] = useState();
+    const [VITAMIN_B2_PERSERVING, setVITAMIN_B2_PERSERVING] = useState();
+    const [IRON_PERSERVING, setIRON_PERSERVING] = useState();
+
+    const [productList, setProductList] = useState([]);
 
     useEffect(async () => {
         const response = await Axios('https://foodchoiceserver.herokuapp.com/foodgroup');
@@ -171,7 +194,7 @@ function CreateProduct() {
             switch (foodgroupsubID) {
                 case 1:
                     if(packageUnitId == 1 || packageUnitId == 2) {
-                        if(quantityValue > 0 && quantityValue <= recServingsizeValueHeigh) {
+                        if(quantityValue > 0 && quantityValue <= (recServingsizeValueHeigh)) {
                             servingPerContrainerValue = quantityValue / quantityValue 
                             servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
                         }
@@ -182,6 +205,31 @@ function CreateProduct() {
                     }
                     else {
                         servingPerContrainerValue = quantityValue / recServingsizeValue 
+                        servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
+                    }
+                    
+                break;
+                case 17:
+                    if(quantityValue > 0 && quantityValue <= (recServingsizeValueHeigh)) {
+                        servingPerContrainerValue = quantityValue / quantityValue 
+                        servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
+                    }
+                break;
+                case 18:
+                    if(quantityValue > 0 && quantityValue <= (recServingsizeValueHeigh)) {
+                        servingPerContrainerValue = quantityValue / quantityValue 
+                        servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
+                    }
+                break;
+                case 19:
+                    if(quantityValue > 0 && quantityValue <= (recServingsizeValueHeigh)) {
+                        servingPerContrainerValue = quantityValue / quantityValue 
+                        servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
+                    }
+                break;
+                case 20:
+                    if(quantityValue > 0 && quantityValue <= (recServingsizeValueHeigh)) {
+                        servingPerContrainerValue = quantityValue / quantityValue 
                         servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
                     }
                 break;
@@ -387,33 +435,10 @@ function CreateProduct() {
         }   
     }
     
-    // ! ========================================= Role : คำนวณค่าโภชนาการ
-    const [productList, setProductList] = useState([]);
-    const [TOTAL_ENERGY_PERSERVING, setTOTAL_ENERGY_PERSERVING] = useState();
-    const [ENERGY_FROM_FAT_PERSERVING, setENERGY_FROM_FAT_PERSERVING] = useState();
-    const [TOTAL_FAT_PERSERVING, setTOTAL_FAT_PERSERVING] = useState();
-    const [TOTAL_FAT_PERCENTAGE, setTOTAL_FAT_PERCENTAGE] = useState();
-    const [SATURATED_FAT_PERSERVING, setSATURATED_FAT_PERSERVING] = useState();
-    const [SATURATED_FAT_PERCENTAGE, setSATURATED_FAT_PERCENTAGE] = useState();
-    const [CHOLESTEROL_PERSERVING, setCHOLESTEROL_PERSERVING] = useState();
-    const [CHOLESTEROL_PERCENTAGE, setCHOLESTEROL_PERCENTAGE] = useState();
-    const [TOTAL_PROTEIN_PERSERVING, setTOTAL_PROTEIN_PERSERVING] = useState();
-    const [TOTAL_CARBOHYDRATES_PERSERVING, setTOTAL_CARBOHYDRATES_PERSERVING] = useState();
-    const [TOTAL_CARBOHYDRATES_PERCENTAGE, setTOTAL_CARBOHYDRATES_PERCENTAGE] = useState();
-    const [TOTAL_SUGAR_PERSERVING, setTOTAL_SUGAR_PERSERVING] = useState();
-    const [DIETARY_FIBER_PERSERVING, setDIETARY_FIBER_PERSERVING] = useState();
-    const [DIETARY_FIBER_PERCENTAGE, setDIETARY_FIBER_PERCENTAGE] = useState();
-    const [SODIUM_PERSERVING, setSODIUM_PERSERVING] = useState();
-    const [SODIUM_PERCENTAGE, setSODIUM_PERCENTAGE] = useState();
-    const [CALCIUM_PERSERVING, setCALCIUM_PERSERVING] = useState();
-    const [VITAMIN_A_PERSERVING, setVITAMIN_A_PERSERVING] = useState();
-    const [VITAMIN_B1_PERSERVING, setVITAMIN_B1_PERSERVING] = useState();
-    const [VITAMIN_B2_PERSERVING, setVITAMIN_B2_PERSERVING] = useState();
-    const [IRON_PERSERVING, setIRON_PERSERVING] = useState();
-
+    // ! ========================================= Role : บันทึกข้อมูล
     const create_calculate = (e) => {
         e.preventDefault();
-
+        
         Axios.post('https://foodch.kaseamsanth.tk/api/gda', {
             volume: volume,
             TOTAL_ENERGY: TOTAL_ENERGY,
@@ -782,6 +807,39 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">กรัม</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>แลคโตส</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">กรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ซูโครส</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">กรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>น้ำตาลโมเลกุลเดี่ยว/คู่</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">กรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-nutriiton-feild">
                                             <label>ใยอาหาร</label>
                                             <div className="create-nutriiton-feild-input">
@@ -794,6 +852,19 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">กรัม</span>
                                             </div>
                                         </div>
+
+
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>แร่ธาตุ (ASH)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">กรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-nutriiton-feild">
                                             <label>โซเดียม</label>
                                             <div className="create-nutriiton-feild-input">
@@ -806,6 +877,28 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">มิลลิกรัม</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>โพแทสเซียม</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>คลอไรด์</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-nutriiton-feild">
                                             <label>แคลเซียม</label>
                                             <div className="create-nutriiton-feild-input">
@@ -818,6 +911,51 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">มิลลิกรัม</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>ฟอสฟอรัส</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>แมกนีเซียม</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>แมงกานีส</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ความชื้น</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">กรัม</span>
+                                            </div>
+                                        </div> */}
+
                                         <div className="create-nutriiton-feild">
                                             <label>วิตามิน A</label>
                                             <div className="create-nutriiton-feild-input">
@@ -830,6 +968,50 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">IU</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>วิตามิน D</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">IU</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามิน E</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">IU</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามิน K1</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามิน C</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-nutriiton-feild">
                                             <label>วิตามิน B1</label>
                                             <div className="create-nutriiton-feild-input">
@@ -854,6 +1036,72 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">มิลลิกรัม</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>ไนอาซิน</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามิน B6</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>กรดโฟลิค</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>กรดแพนโทเธนิค</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามิน B12</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ไบโอติน</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-nutriiton-feild">
                                             <label>เหล็ก</label>
                                             <div className="create-nutriiton-feild-input">
@@ -866,6 +1114,162 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">มิลลิกรัม</span>
                                             </div>
                                         </div>
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>ไอโอดีน</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ทองแดง</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>สังกะสี</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ซีลีเนียม</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>โครเมียม</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>โมลิบดีนัม</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ฟลูออไรด์</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
+                                            </div>
+                                        </div> */}
+
+
+                                        {/* <div className="create-nutriiton-feild">
+                                            <label>ทอรีน (กรดอะมิโนซัลโฟนิก)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>                         
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>โคลีน (สารอาหารกลุ่มของวิตามินบี)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>อิโนซิทอล (สารอาหารกลุ่มวิตามินบีรวม)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>แอลคาร์นิทีน</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>กรดลิโนเลนิก (กรดไขมันในกลุ่มโอเมกา 3)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>กรดลิโนเลอิก (กรดไขมันในกลุ่มโอเมกา 6)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>กรดโอเลอิก (กลุ่มไขมันไม่อิ่มตัวเชิงเดี่ยวโอเมกา 9)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    className="create-feild-input" 
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div> */}
                                         <div className="create-button">
                                             <button type="reset"  className="button-reset">รีเซ็ต</button>
                                             <button type="submit" className="button-calculate">คำนวณ</button>
@@ -1057,7 +1461,11 @@ function CreateProduct() {
                                             </div>
 
                                             <hr className="line" />
-                                            <div> * ร้อยละของปริมาณสารอาหารที่แนะนำให้บริโภคต่อวันสำหรับคนไทยอายุตั้งแต่ 6 ปีขึ้นไป (Thai RDI) โดยคิดจากความต้องการพลังงานวันละ 2,000 กิโลแคลอรี่ </div>
+
+                                            <div>
+                                                * ร้อยละของปริมาณสารอาหารที่แนะนำให้บริโภคต่อวันสำหรับคนไทยอายุตั้งแต่ 6 ปีขึ้นไป (Thai RDI) โดยคิดจากความต้องการพลังงานวันละ 2,000 กิโลแคลอรี่ 
+                                            </div>
+
                                         </div>
                                     </div>         
                                 </div>
