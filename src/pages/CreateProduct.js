@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from "react-dom";
 
 import Axios from "axios"
 import * as htmlToImage from 'html-to-image';
@@ -53,19 +54,26 @@ function CreateProduct() {
     const [VITAMIN_B1, setVITAMIN_B1] = useState(); // วิตามินบี 1
     const [VITAMIN_B2, setVITAMIN_B2] = useState(); // วิตามินบี 2
     const [IRON, setIRON] = useState(); // เหล็ก
+    const [VITAMIN_D, setVITAMIN_D] = useState(); // วิตามิน D
+    const [VITAMIN_E, setVITAMIN_E] = useState(); // วิตามิน E
+    const [ZINC, setZINC] = useState(); // สังกะสี
+    const [SELENIUM, setSELENIUM] = useState(); // ซีลีเนียม
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoicedata.herokuapp.com/foodgroup');
+        // const response = await Axios.get('http://localhost:3001/foodgroup');
+        const response = await Axios.get('https://foodchoiceapi.herokuapp.com/foodgroup');
         setOptionFoodGroup(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoicedata.herokuapp.com/packageunit');
+        // const response = await Axios.get('http://localhost:3001/packageunit');
+        const response = await Axios.get('https://foodchoiceapi.herokuapp.com/packageunit');
         setOptionPackageUnit(response.data)
     }, [])
 
     useEffect(async () => {
-        const response = await Axios.get('https://foodchoicedata.herokuapp.com/packageperunit');
+        // const response = await Axios.get('http://localhost:3001/packageperunit');
+        const response = await Axios.get('https://foodchoiceapi.herokuapp.com/packageperunit');
         setOptionPackagePerServingSize(response.data)
     }, [])
 
@@ -75,7 +83,8 @@ function CreateProduct() {
         setFoodGroupId(SubmitFoodGroupId)
         // const selectedIndex = e.target.options.selectedIndex
         // const group_name = e.target.options[selectedIndex].getAttribute('name')
-        Axios.get('https://foodchoicedata.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
+        // Axios.get('http://localhost:3001/foodgroupsub/'+e.target.value).then(response => {   
+        Axios.get('https://foodchoiceapi.herokuapp.com/foodgroupsub/'+e.target.value).then(response => {   
             setOptionFoodGroupSub(response.data)
         })
     }  
@@ -238,7 +247,6 @@ function CreateProduct() {
                 else {
                     setServingPerContrainerText("ประมาณ ")
                 }
-                console.log(servingPerContrainerText)
 
             }  
             else if(servingPerContrainerValueRounding >= 2 && servingPerContrainerValueRounding <= 5) {
@@ -282,7 +290,6 @@ function CreateProduct() {
                 else {
                     setServingPerContrainerText("ประมาณ ")
                 }
-                console.log(servingPerContrainerText)
             }
             else {
     
@@ -331,7 +338,6 @@ function CreateProduct() {
             else {
                 setServingPerContrainerText("ประมาณ ")
             }
-            console.log(servingPerContrainerText)
         }
         else if(calculateId == "custom") {
             changeDisabled = false
@@ -341,12 +347,13 @@ function CreateProduct() {
             var quantityValue = parseInt(quantity) // น้ำหนักสุทธิ
             var servingPerContrainerValue = 0 // จำนวนหน่วยบริโภคยังไม่ปัดเศษ
             var servingPerContrainerValueRounding = 0 //จำนวนหน่วยบริโภคเทศนิยม 1 ตำแหน่ง
+            var servingPerContrainerValueCustom = parseInt(inputServingPerContrainer)
 
-            servingPerContrainerValue = quantityValue / recServingsizeValue 
-            servingPerContrainerValueRounding = Number(servingPerContrainerValue.toFixed(1)) 
+            console.log(servingPerContrainerValueCustom)
+
+            servingPerContrainerValueRounding = servingPerContrainerValueCustom
 
             console.log("น้ำหนักสุทธิ : ", quantityValue)
-            console.log("จำนวนหน่วยบริโภค : ", servingPerContrainerValue)
             console.log("จำนวนหน่วยบริโภค ปัดเศษ : ", servingPerContrainerValueRounding)
 
             if(servingPerContrainerValueRounding < 2) {
@@ -382,13 +389,74 @@ function CreateProduct() {
 
             }  
             else if(servingPerContrainerValueRounding >= 2 && servingPerContrainerValueRounding <= 5) {
+                var servingPerContrainerRouding = Math.round(servingPerContrainerValueRounding * 2) / 2
+                var servingSize = 1
 
+                if(servingPerContrainerValueRounding == 0 || servingPerContrainerValueRounding < 1) {
+                    servingPerContrainerRouding = 1
+                    servingSize = 1
+                }
+                else if(servingPerContrainerRouding == 1) {
+                    servingSize = 1
+                }
+                else {
+                    if(foodgroupsubID >= 1 && foodgroupsubID <= 6) {
+                        servingSize = 1
+                    }
+                    else{
+                        servingSize = 1 + "/" + servingPerContrainerRouding
+                    }
+                }
+
+                setInputServingPerContrainer(servingPerContrainerRouding)
+                setServingPerContrainer(servingPerContrainerRouding)
+                setServingSize(servingSize)
+
+                const servingsizeWeightValue = quantityValue / servingPerContrainerRouding
+                const servingsizeRouding = Math.round(servingsizeWeightValue)
+                setServingsizeWeight(servingsizeRouding)
+                setVOLUME(servingsizeRouding)
+                console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) : ", servingsizeWeightValue)
+                console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) ปัดเศษ : ", servingsizeRouding)
             }
             else {
+                var servingPerContrainerRouding = Math.round(servingPerContrainerValueRounding)
+                var servingSize = 1
+    
+                // กรณี ค่าที่ได้อยู่กึ่งกลางพอดี เช่น 7.5 ให้ปัดเป็น 7
+                if(servingPerContrainerValueRounding == Math.round(servingPerContrainerValueRounding * 2) / 2){
+                    servingPerContrainerRouding = Math.floor(servingPerContrainerValueRounding)
+                }
 
+                if(servingPerContrainerValueRounding == 0 || servingPerContrainerValueRounding < 1) {
+                    servingPerContrainerRouding = 1
+                    servingSize = 1
+                }
+                else if(servingPerContrainerRouding == 1) {
+                    servingSize = 1
+                }
+                else {
+                    if(foodgroupsubID >= 1 && foodgroupsubID <= 6) {
+                        servingSize = 1
+                    }
+                    else{
+                        servingSize = 1 + "/" + servingPerContrainerRouding
+                    }
+                }
+
+                setInputServingPerContrainer(servingPerContrainerRouding)
+                setServingPerContrainer(servingPerContrainerRouding)
+                setServingSize(servingSize)
+
+                const servingsizeWeightValue = quantityValue / servingPerContrainerRouding
+                const servingsizeRouding = Math.round(servingsizeWeightValue)
+                setServingsizeWeight(servingsizeRouding)
+                setVOLUME(servingsizeRouding)
+                console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) : ", servingsizeWeightValue)
+                console.log("หนึ่งหน่วยบริโภค (น้ำหนัก) ปัดเศษ : ", servingsizeRouding)
             }
-        }   
-    }
+        }
+    }   
     
     // ! ========================================= Role : คำนวณค่าโภชนาการ
     const [productList, setProductList] = useState([]);
@@ -413,6 +481,15 @@ function CreateProduct() {
     const [VITAMIN_B1_PERSERVING, setVITAMIN_B1_PERSERVING] = useState();
     const [VITAMIN_B2_PERSERVING, setVITAMIN_B2_PERSERVING] = useState();
     const [IRON_PERSERVING, setIRON_PERSERVING] = useState();
+    const [VITAMIN_D_PERSERVING, setVITAMIN_D_PERSERVING] = useState();
+    const [VITAMIN_E_PERSERVING, setVITAMIN_E_PERSERVING] = useState();
+    const [ZINC_PERSERVING, setZINC_PERSERVING] = useState();
+    const [SELENIUM_PERSERVING, setSELENIUM_PERSERVING] = useState();
+
+    const [hide_VITAMIN_D, setHidden_VITAMIN_D] = useState(true);
+    const [hide_VITAMIN_E, setHidden_VITAMIN_E] = useState(true);
+    const [hide_ZINC, setHidden_ZINC] = useState(true);
+    const [hide_SELENIUM, setHidden_SELENIUM] = useState(true);
 
     const create_calculate = (e) => {
         e.preventDefault();
@@ -434,6 +511,10 @@ function CreateProduct() {
             VITAMIN_B1: VITAMIN_B1,
             VITAMIN_B2: VITAMIN_B2,
             IRON: IRON,
+            VITAMIN_D: VITAMIN_D,
+            VITAMIN_E: VITAMIN_E,
+            ZINC: ZINC,
+            SELENIUM: SELENIUM,
         }).then((response) => {
             setProductList([...productList, {
                 volume: volume,
@@ -452,6 +533,10 @@ function CreateProduct() {
                 VITAMIN_B1: VITAMIN_B1,
                 VITAMIN_B2: VITAMIN_B2,
                 IRON: IRON,
+                VITAMIN_D: VITAMIN_D,
+                VITAMIN_E: VITAMIN_E,
+                ZINC: ZINC,
+                SELENIUM: SELENIUM,
             }])
             console.log(response.data)
             setTOTAL_ENERGY_PERSERVING(response.data.TOTAL_ENERGY.per_serving)
@@ -475,6 +560,39 @@ function CreateProduct() {
             setVITAMIN_B1_PERSERVING(response.data.VITAMIN_B1.thai_rdi_per_serving)
             setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.thai_rdi_per_serving)
             setIRON_PERSERVING(response.data.IRON.thai_rdi_per_serving)
+            setVITAMIN_D_PERSERVING(response.data.VITAMIN_D.thai_rdi_per_serving)
+            setVITAMIN_E_PERSERVING(response.data.VITAMIN_E.thai_rdi_per_serving)
+            setZINC_PERSERVING(response.data.ZINC.thai_rdi_per_serving)
+            setSELENIUM_PERSERVING(response.data.SELENIUM.thai_rdi_per_serving)
+
+            var vit_d = response.data.VITAMIN_D.thai_rdi_per_serving
+            var vit_e = response.data.VITAMIN_E.thai_rdi_per_serving
+            var zinc = response.data.ZINC.thai_rdi_per_serving
+            var sele = response.data.SELENIUM.thai_rdi_per_serving
+
+            if(vit_d == "-"){
+                setHidden_VITAMIN_D(true)
+            }else{
+                setHidden_VITAMIN_D(false)
+            }
+
+            if(vit_e == "-"){
+                setHidden_VITAMIN_E(true)
+            }else{
+                setHidden_VITAMIN_E(false)
+            }
+
+            if(zinc == "-"){
+                setHidden_ZINC(true)
+            }else{
+                setHidden_ZINC(false)
+            }
+
+            if(sele == "-"){
+                setHidden_SELENIUM(true)
+            }else{
+                setHidden_SELENIUM(false)
+            }
         })
     }
 
@@ -519,8 +637,7 @@ function CreateProduct() {
         })
     }
 
-    const button_image = () => {
-
+    const create_image = () => {
         htmlToImage.toJpeg(document.getElementById('download-label'), { quality: 0.95 })
         .then(function (dataUrl) {
             var link = document.createElement('a');
@@ -528,8 +645,122 @@ function CreateProduct() {
             link.href = dataUrl;
             link.click();
         });
+    }
+
+    const [Id, setId] = useState()
+    const [name, setName] = useState({ name: "" })
+    const [fields, setFields] = useState([{ id: "", name: "", value: "" }])
+    const [vit1, setVit1] = useState()
+    const [vit2, setVit2] = useState()
+
+    function createInputs() {
+        return fields.map((field, idx) => 
+                <div className="create-nutriiton-feild none">
+                    <label>{field.name}</label>
+                    <div key={`${field}-${idx}`} className="create-nutriiton-feild-input">
+                        <input
+                        type="text"
+                        placeholder={field.name}  
+                        value={field.value || ""}
+                        onChange={e => handleChange2(idx, e)}
+                        className="create-feild-input"
+                        />
+                        <span className="create-feild-unit">มิลลิกรัม</span>
+                    </div>
+                    <button type="button" onClick={() => handleRemove(idx)}>X</button>
+                </div>
+        );
+    }
+
+    const handleChange = (event) => {    
+        const selectedId = event.target.options.selectedIndex
+        const resultId = event.target.options[selectedId].getAttribute('id')
+        setId(resultId)
+
+        const selectedName = event.target.options.selectedIndex
+        const resultName = event.target.options[selectedName].getAttribute('name')
+        setName(resultName); 
+
+        console.log(resultId," : " ,resultName)
+
+        // const values = [...fields];
+        // values.push({ value: "", name: resultName});
+        // setFields(values);
+        // console.log(values)
+    }
+
+    function handleChange2(i, event) {
+        const values = [...fields];
+        values[i].value = event.target.value;
+        setFields(values);
+        if(values[i].id == "1"){
+            setVit1(values[i].value)
+        }
+        else if(values[i].id == "2"){
+            setVit2(values[i].value)
+        }
 
     }
+
+    function handleAdd() {
+        const values = [...fields];
+        values.push({ id: Id, name: name, value: ""});
+        setFields(values);
+    }
+
+    function handleRemove(i) {
+        const values = [...fields];
+        if(values[i].id == "1"){
+            setVit1("-")
+        }
+        else if(values[i].id == "2"){
+            setVit2("-")
+        }
+        values.splice(i, 1);
+        setFields(values);
+
+    }
+
+    // ===========================================================================
+
+    // const [values, setValues] = useState({val: [{id: null, value: null}]});
+    // const [values, setValues] = useState({val: []});
+
+    // function createInputs() {
+    //     return values.val.map((val, i) =>
+    //         <div className="create-nutriiton-feild">
+    //             <label></label>
+    //             <div key={i} className="create-nutriiton-feild-input">
+    //                 <input
+    //                 type="text"
+    //                 placeholder=""
+    //                 value={val||''}
+    //                 className="create-feild-input"
+    //                 onChange={handleChangeValue.bind(i)}
+    //                 />
+    //                 <span className="create-feild-unit">มิลลิกรัม</span>
+    //             </div>
+    //             <input type='button' value='remove' onClick={removeClick.bind(i)} />
+    //         </div>
+    //     );
+    // }
+
+    // function handleChangeValue(event) {
+    //     let vals = [...values.val];
+    //     vals[this] = event.target.value;
+    //     setValues({val: vals });
+    // }
+
+    // const addClick = () => {
+    //     setValues({val: [...values.val, '']})
+    //     console.log(...values.val)
+    // }
+
+    // const removeClick = () => {
+    //     let vals = [...values.val];
+    //     vals.splice(this,1);
+    //     setValues({ val: vals });
+    // }   
    
     return (
         <Layout className="createProduct">
@@ -633,7 +864,13 @@ function CreateProduct() {
                                             <div className="create-information-feild">
                                                 <div className="create-information-feild-input">
                                                     <input 
-                                                        type="text" 
+                                                        type="text"
+                                                        onKeyPress={(event) => {
+                                                            if (!/[0-9,.]$/.test(event.key)) {
+                                                              event.preventDefault();
+                                                            }
+                                                          }
+                                                        }
                                                         className="create-feild-input" 
                                                         onChange={(e) => {setQuantity(e.target.value)}}
                                                         // disabled={disabled}
@@ -645,11 +882,11 @@ function CreateProduct() {
                                         </div>
                                         <div className="create-feild">
                                             <label>จำนวนหน่วยบริโภค</label>
-                                            <div className="create-feild-servingspercontainer">       
-                                                <input type="radio" id="auto" value="auto" onClick={HandleServingSize}/>
-                                                <label for="auto">คำนวณจากหน่วยอ้างอิง</label>
-                                                <input type="radio" id="custom" value="custom" onClick={HandleServingSize} disabled/>
-                                                <label for="custom" className="not-allow">กำหนดเอง</label>
+                                            <div className="create-feild-servingspercontainer">
+                                                <input type="radio" id="auto" name="type" value="auto" onClick={HandleServingSize}/>
+                                                <label htmlFor="auto">คำนวณจากหน่วยอ้างอิง</label>
+                                                <input type="radio" id="custom" name="type" value="custom" onClick={HandleServingSize} disabled/>
+                                                <label htmlFor="custom" className="not-allow">กำหนดเอง</label> 
                                                 <input 
                                                     type="text" 
                                                     className="create-feild-input" 
@@ -696,10 +933,16 @@ function CreateProduct() {
                                     <form action="" onSubmit={create_calculate}>
 
                                         <div className="create-nutriiton-feild">
-                                            <label>พลังงานทั้งหมด</label>
+                                            <label>พลังงาน (Energy)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setTOTAL_ENERGY(e.target.value)}} 
                                                     required 
@@ -709,10 +952,16 @@ function CreateProduct() {
                                         </div>
                                         
                                         <div className="create-nutriiton-feild">
-                                            <label>พลังงานจากไขมัน</label>
+                                            <label>พลังงานจากไขมัน (Energy from fat)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setENERGY_FROM_FAT(e.target.value)}} 
                                                     required 
@@ -721,10 +970,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>ไขมันทั้งหมด</label>
+                                            <label>ไขมัน (Fat)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setTOTAL_FAT(e.target.value)}} 
                                                     required 
@@ -733,10 +988,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>ไขมันอิ่มตัว</label>
+                                            <label>ไขมันอิ่มตัว (Saturated fat)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setSATURATED_FAT(e.target.value)}} 
                                                     required 
@@ -745,10 +1006,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>โคเลสเตอรอล</label>
+                                            <label>โคเลสเตอรอล (Cholesterol)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setCHOLESTEROL(e.target.value)}} 
                                                     required 
@@ -757,10 +1024,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>โปรตีน</label>
+                                            <label>โปรตีน (Protein)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setTOTAL_PROTEIN(e.target.value)}} 
                                                     required 
@@ -769,10 +1042,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>คาร์โบไฮเดรต</label>
+                                            <label>คาร์โบไฮเดรต (Carbohydrates)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setTOTAL_CARBOHYDRATES(e.target.value)}} 
                                                     required 
@@ -781,10 +1060,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>น้ำตาล</label>
+                                            <label>น้ำตาล (Sugar)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setTOTAL_SUGAR(e.target.value)}} 
                                                     required 
@@ -793,10 +1078,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>ใยอาหาร</label>
+                                            <label>ใยอาหาร (Dietary fiber)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setDIETARY_FIBER(e.target.value)}} 
                                                     required 
@@ -805,10 +1096,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>โซเดียม</label>
+                                            <label>โซเดียม (Sodium)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setSODIUM(e.target.value)}}
                                                     required    
@@ -817,10 +1114,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>แคลเซียม</label>
+                                            <label>แคลเซียม (Calcium)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setCALCIUM(e.target.value)}}
                                                     required 
@@ -829,10 +1132,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>วิตามิน A</label>
+                                            <label>วิตามินเอ (Vitamin A)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setVITAMIN_A(e.target.value)}}
                                                     required 
@@ -841,10 +1150,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>วิตามิน B1</label>
+                                            <label>วิตามินบี 1 (Vitamin B1)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setVITAMIN_B1(e.target.value)}}
                                                     required 
@@ -853,10 +1168,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>วิตามิน B2</label>
+                                            <label>วิตามินบี 2 (Vitamin B2)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setVITAMIN_B2(e.target.value)}}
                                                     required 
@@ -865,10 +1186,16 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
-                                            <label>เหล็ก</label>
+                                            <label>เหล็ก (IRON)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
                                                     type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
                                                     className="create-feild-input" 
                                                     onChange={(e) => {setIRON(e.target.value)}}
                                                     required 
@@ -876,6 +1203,116 @@ function CreateProduct() {
                                                 <span className="create-feild-unit">มิลลิกรัม</span>
                                             </div>
                                         </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามินดี (Vitamin D)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
+                                                    className="create-feild-input" 
+                                                    onChange={(e) => {setVITAMIN_D(e.target.value)}}
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>วิตามินอี (Vitamin E)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
+                                                    className="create-feild-input" 
+                                                    onChange={(e) => {setVITAMIN_E(e.target.value)}}
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>สังกะสี (Zinc)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
+                                                    className="create-feild-input" 
+                                                    onChange={(e) => {setZINC(e.target.value)}}
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
+                                            <label>ซีลีเนียม (Selenium)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
+                                                    className="create-feild-input" 
+                                                    onChange={(e) => {setSELENIUM(e.target.value)}}
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+
+
+                                            {/* <div>vit1: {vit1}</div>
+                                            <div>vit2: {vit2}</div>
+                                        <div className="create-feild">
+                                                <select className="create-feild-select" onChange={handleChange}>            
+                                                    <option id="0" name="0">เลือกสารอาหาร</option>
+                                                    <option id="1" name="Potassium">(Potassium)</option>
+                                                    <option id="2" name="Chloride">(Chloride)</option>
+                                                    <option id="3" name="Phosphorus">(Phosphorus)</option> */}
+                                                    {/* <option id="4" name="">(Magnesium)</option>
+                                                    <option id="5" name="">(Manganese)</option>
+                                                    <option id="6" name="">(Vitamin D)</option>
+                                                    <option id="7" name="">(Vitamin E)</option>
+                                                    <option id="8" name="">(Vitamin K1)</option>
+                                                    <option id="9" name="">(Vitamin C)</option>
+                                                    <option id="10" name="">(Niacin)</option>
+                                                    <option id="11" name="">(Vitamin B6)</option>
+                                                    <option id="12" name="">(Folic acid)</option>
+                                                    <option id="13" name="">(Pantothenic Acid)</option>
+                                                    <option id="14" name="">(Vitamin B12)</option>
+                                                    <option id="15" name="">(Biotin)</option>
+                                                    <option id="16" name="">(Iodine)</option>
+                                                    <option id="17" name="">(Copper)</option>
+                                                    <option id="18" name="">(Zinc)</option>
+                                                    <option id="19" name="">(Selenium)</option>
+                                                    <option id="20" name="">(Chromium)</option>
+                                                    <option id="21" name="">(Molydenum)</option>
+                                                    <option id="22" name="">(Fluoride)</option> */}
+
+                                                {/* </select>
+                                                <button type="button" onClick={() => handleAdd()}>
+                                                    +
+                                                </button>         
+                                        </div>
+                                        
+                                        {createInputs()} */}
+                                       
                                         <div className="create-button">
                                             <button type="reset"  className="button-reset">รีเซ็ต</button>
                                             <button type="submit" className="button-calculate">คำนวณ</button>
@@ -911,17 +1348,12 @@ function CreateProduct() {
 
                                             <div className="">
                                                 <div className="create-label-text-bold">คุณค่าทางโภชนาการต่อหนึ่งหน่วย</div>
-                                                <div className="create-label-layout-flex">
+                                                <div className="create-label-layout-flex-column">
                                                     <div className="">
                                                         <span className="create-label-nutrition-energy create-label-text-bold">พลังงานทั้งหมด</span>
                                                         <span className="create-label-perserving">{TOTAL_ENERGY_PERSERVING}</span>
                                                         <span className="create-label-unit">กิโลแคลอรี่</span>
                                                     </div>
-                                                    {/* {productServingSize.map(val => (
-                                                        <span>
-                                                            {val.per_serving_volume}
-                                                        </span>
-                                                    ))} */}
                                                     <div className="">
                                                         <span className="create-label-nutrition-energy">(พลังงานจากไขมัน</span>
                                                         <span className="create-label-perserving">{ENERGY_FROM_FAT_PERSERVING}</span>
@@ -1031,39 +1463,73 @@ function CreateProduct() {
 
                                             <hr className="line" />
 
-                                            <div className="create-label-text-right">ร้อยละของปริมาณที่แนะนำต่อวัน*</div>
+                                            <div className="create-label-text-center">ร้อยละของปริมาณที่แนะนำต่อวัน*</div>
                                             <div className="">
-                                                <div className="create-label-layout-flex">
+                                                <div className="create-label-layout-grid">
                                                     <div className="create-label-nutrition-box">
-                                                        <span className="create-label-nutrition-name create-label-text-bold">วิตามินเอ</span>
-                                                        <span className="create-label-percentage">{VITAMIN_A_PERSERVING}</span>
-                                                        <span className="">%</span>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินเอ</span>
+                                                            <span className="create-label-percentage">{VITAMIN_A_PERSERVING}</span>
+                                                            <span className="">%</span>
+                                                        </div>  
                                                     </div>
                                                     <div className="create-label-nutrition-box">
-                                                        <span className="create-label-nutrition-name create-label-text-bold">วิตามินบี 1</span>
-                                                        <span className="create-label-percentage">{VITAMIN_B1_PERSERVING}</span>
-                                                        <span className="">%</span>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินบี 1</span>
+                                                            <span className="create-label-percentage">{VITAMIN_B1_PERSERVING}</span>
+                                                            <span className="">%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box">
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินบี 2</span>
+                                                            <span className="create-label-percentage">{VITAMIN_B2_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box">
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">แคลเซียม</span>
+                                                            <span className="create-label-percentage">{CALCIUM_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box">
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">เหล็ก</span>
+                                                            <span className="create-label-percentage">{IRON_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_D}>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold" >วิตามินดี</span>
+                                                            <span className="create-label-percentage" >{VITAMIN_D_PERSERVING}</span>
+                                                            <span >%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_E}>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินอี</span>
+                                                            <span className="create-label-percentage">{VITAMIN_E_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box" hidden={hide_ZINC}>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">สังกะสี</span>
+                                                            <span className="create-label-percentage">{ZINC_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box" hidden={hide_SELENIUM}>
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold">ซีลีเนียม</span>
+                                                            <span className="create-label-percentage">{SELENIUM_PERSERVING}</span>
+                                                            <span>%</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="create-label-layout-flex">
-                                                    <div className="create-label-nutrition-box">
-                                                        <span className="create-label-nutrition-name create-label-text-bold">วิตามินบี 2</span>
-                                                        <span className="create-label-percentage">{VITAMIN_B2_PERSERVING}</span>
-                                                        <span>%</span>
-                                                    </div>
-                                                    <div className="create-label-nutrition-box">
-                                                        <span className="create-label-nutrition-name create-label-text-bold">แคลเซียม</span>
-                                                        <span className="create-label-percentage">{CALCIUM_PERSERVING}</span>
-                                                        <span>%</span>
-                                                    </div>
-                                                </div>
-                                                <div className="create-label-layout-flex">
-                                                    <div className="create-label-nutrition-box">
-                                                        <span className="create-label-nutrition-name create-label-text-bold">เหล็ก</span>
-                                                        <span className="create-label-percentage">{IRON_PERSERVING}</span>
-                                                        <span>%</span>
-                                                    </div>
-                                                </div> 
                                             </div>
 
                                             <hr className="line" />
@@ -1076,9 +1542,9 @@ function CreateProduct() {
                                     {/* <div className="create-button-submit">
                                         <button className="button-submit">บันทึก</button>
                                     </div> */}
-                                    <div className="create-button-submit">
-                                        <button onClick={button_image} className="button-submit">ดาวน์โหลด</button>
-                                    </div>
+                                    {/* <div className="create-button-download">
+                                        <button onClick={create_image} className="button-download">ดาวน์โหลด</button>
+                                    </div> */}
                                 </div>
                                 
                             </div>

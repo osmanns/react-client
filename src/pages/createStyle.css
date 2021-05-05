@@ -17,15 +17,13 @@
     padding: .5rem 1rem 1rem 1rem;
 }
 
-.create-contrainer-form-title,
-.create-contrainer-label-title {
+.create-contrainer-form-title{
     padding: 1rem .5rem;
     font-size: var(--h2-font-size);
     font-weight: var(--font-semi-bold);
     color: var(--text-dark-color);
 }
-.create-contrainer-form-title p,
-.create-contrainer-label-title p {
+.create-contrainer-form-title p {
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
     color: var(--text-color-light);
@@ -112,9 +110,6 @@
     border: 1px solid rgb(75, 158, 253);
     border-radius: 50%; */
     margin-right: 5px;
-}
-.create-feild-servingspercontainer label.not-allow {
-    cursor: not-allowed;
 }
 .create-feild-servingspercontainer label:hover {
     color: #ffffff;
@@ -255,8 +250,8 @@
     position: relative;
 }
 .create-nutriiton-feild label {
-    width: calc(35%);
-    padding-left: 2.5rem;
+    width: calc(80%);
+    padding-left: 2rem;
 }
 .create-nutriiton-feild .create-nutriiton-feild-input {
     width: calc(100%);
@@ -305,19 +300,37 @@
 
 /* ! ============================================================================ */
 .create-contrainer-label {
-    width: calc(40%);
+    width: 500px;
     background: #F0F0F0;
 }
 .create-label-product-title {
     text-align: center;
-    font-size: var(--h3-font-size);
-    font-weight: var(--font-semi-bold);
+    font-size: 1.12rem;
+    font-weight: 600;
     margin-bottom: .5rem;
 }
-
+.create-contrainer-label-title {
+    padding: 1rem .5rem;
+    font-size: 1.25rem;;
+    font-weight: 600;
+    color: #161212;
+}
+.create-contrainer-label-title p {
+    font-size: .813rem;
+    font-weight: 500;
+    color: #8f8a8a;
+}
+.create-label-layout-flex-column {
+    display: flex;
+    flex-direction: row;
+}
 .create-label-layout-flex {
     display: flex;
     flex-direction: row;
+}
+.create-label-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .create-label-nutrition-name {
     width: calc(40%);
@@ -339,33 +352,35 @@
     width: 30px;
     padding-right: 5px;
     text-align: right;
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-semi-bold);
+    font-size: .938rem;
+    font-weight: 600;
     color: #009efa;
 }
 .create-label-percentage {
     width: 40px;
     padding-right: 5px;
     text-align: right;
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-semi-bold);
+    font-size: .938rem;
+    font-weight: 600;
     color: #009efa;
 }
 .create-label-nutrition-box {
-    width: calc(50%);
-    display: flex;
-    flex-direction: row;
-
+    /* width: 220px; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    
+    /* display: grid; */
+    /* grid-template-columns: 100px 1fr; */
 }
-.create-label-nutrition-box .create-label-nutrition-name {
-    width: calc(40%) !important;
+.create-label-layout-flex span.create-label-nutrition-name-element {
+    width: 100px;
 }
-.create-label-nutrition-box .create-label-percentage {
+.create-label-layout-flex span.create-label-percentage {
     width: 80px;
     padding-right: 5px;
     text-align: right;
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-semi-bold);
+    font-size: .938rem;
+    font-weight: 600;
     color: #009efa;
 }
 .create-label-unit {
@@ -373,7 +388,7 @@
 }
 
 .create-label-text-bold {
-    font-weight: var(--font-semi-bold);
+    font-weight: 600;
 }
 .create-label-text-align {
     padding-left: 2.25rem;
@@ -381,6 +396,10 @@
 .create-label-text-right {
     width: 100%;
     text-align: right;
+}
+.create-label-text-center {
+    width: 100%;
+    text-align: center;
 }
 
 
@@ -402,7 +421,7 @@ button.button-reset {
     border-radius: .5rem;
     font-size: 18px;
     font-weight: 600;
-    font-weight: var(--font-semi-bold);
+    font-weight: 600;
     letter-spacing: 1px;
     z-index: 1;
     color: #ffffff;
@@ -422,7 +441,7 @@ button.button-calculate {
     border-radius: .5rem;
     font-size: 18px;
     font-weight: 600;
-    font-weight: var(--font-semi-bold);
+    font-weight: 600;
     letter-spacing: 1px;
     z-index: 1;
     color: #ffffff;
@@ -434,14 +453,14 @@ button.button-calculate:hover {
     background: rgba(72, 149, 239, 1);
     box-shadow: 0 0 4px rgb(80, 158, 247);
 }
-.create-button-submit {
+.create-button-download {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     padding: .75rem 0 .5rem 0;
 }
-button.button-submit {
+button.button-download {
     position: relative;
     padding: 7.5px 25px;
     margin-left: 30px;
@@ -449,18 +468,19 @@ button.button-submit {
     border-radius: .5rem;
     font-size: 18px;
     font-weight: 600;
-    font-weight: var(--font-semi-bold);
+    font-weight: 600;
     letter-spacing: 1px;
     z-index: 1;
     color: #ffffff;
     cursor: pointer;
     background: rgba(51, 223, 94, 0.8);
 }
-button.button-submit:hover {
+button.button-download:hover {
     color: #ffffff;
     background: rgba(37, 194, 76, 0.8);
     box-shadow: 0 0 4px rgba(71, 211, 106, 0.8);
 }
+
 /* * ==================== Scroll Top ==================== */
 a#scroll-top ion-icon {
     font-size: 1.75rem;
@@ -468,11 +488,14 @@ a#scroll-top ion-icon {
     color: #ffffff;
 }
 
-  /* * ======================= Line ======================= */
+/* * ======================= Line ======================= */
 .line {
     height: .75px;
     margin: .1rem 0;
     border-width: 0;
-    color: var(--line-color);
-    background-color:var(--line-color);
+    color: #d2d6da;
+    background-color: #d2d6da;
+}
+label.not-allow {
+    cursor: not-allowed;
 }
