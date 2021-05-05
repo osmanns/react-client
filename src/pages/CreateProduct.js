@@ -488,11 +488,11 @@ function CreateProduct() {
     const [ZINC_PERSERVING, setZINC_PERSERVING] = useState();
     const [SELENIUM_PERSERVING, setSELENIUM_PERSERVING] = useState();
 
-    const [hide_VITAMIN_C, setHidden_VITAMIN_C] = useState(true);
-    const [hide_VITAMIN_D, setHidden_VITAMIN_D] = useState(true);
-    const [hide_VITAMIN_E, setHidden_VITAMIN_E] = useState(true);
-    const [hide_ZINC, setHidden_ZINC] = useState(true);
-    const [hide_SELENIUM, setHidden_SELENIUM] = useState(true);
+    const [hide_VITAMIN_C, setHidden_VITAMIN_C] = useState(false);
+    const [hide_VITAMIN_D, setHidden_VITAMIN_D] = useState(false);
+    const [hide_VITAMIN_E, setHidden_VITAMIN_E] = useState(false);
+    const [hide_ZINC, setHidden_ZINC] = useState(false);
+    const [hide_SELENIUM, setHidden_SELENIUM] = useState(false);
 
     const create_calculate = (e) => {
         e.preventDefault();
