@@ -1146,7 +1146,7 @@ function CreateProduct() {
                                                     onChange={(e) => {setVITAMIN_A(e.target.value)}}
                                                     required 
                                                 />
-                                                <span className="create-feild-unit">IU</span>
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
@@ -1218,7 +1218,7 @@ function CreateProduct() {
                                                     onChange={(e) => {setVITAMIN_D(e.target.value)}}
                                                     required 
                                                 />
-                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
@@ -1236,7 +1236,7 @@ function CreateProduct() {
                                                     onChange={(e) => {setVITAMIN_E(e.target.value)}}
                                                     required 
                                                 />
-                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
@@ -1272,7 +1272,7 @@ function CreateProduct() {
                                                     onChange={(e) => {setSELENIUM(e.target.value)}}
                                                     required 
                                                 />
-                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                                <span className="create-feild-unit">ไมโครกรัม</span>
                                             </div>
                                         </div>
 
