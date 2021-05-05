@@ -54,6 +54,7 @@ function CreateProduct() {
     const [VITAMIN_B1, setVITAMIN_B1] = useState(); // วิตามินบี 1
     const [VITAMIN_B2, setVITAMIN_B2] = useState(); // วิตามินบี 2
     const [IRON, setIRON] = useState(); // เหล็ก
+    const [VITAMIN_C, setVITAMIN_C] = useState(); // วิตามิน C
     const [VITAMIN_D, setVITAMIN_D] = useState(); // วิตามิน D
     const [VITAMIN_E, setVITAMIN_E] = useState(); // วิตามิน E
     const [ZINC, setZINC] = useState(); // สังกะสี
@@ -481,11 +482,13 @@ function CreateProduct() {
     const [VITAMIN_B1_PERSERVING, setVITAMIN_B1_PERSERVING] = useState();
     const [VITAMIN_B2_PERSERVING, setVITAMIN_B2_PERSERVING] = useState();
     const [IRON_PERSERVING, setIRON_PERSERVING] = useState();
+    const [VITAMIN_C_PERSERVING, setVITAMIN_C_PERSERVING] = useState();
     const [VITAMIN_D_PERSERVING, setVITAMIN_D_PERSERVING] = useState();
     const [VITAMIN_E_PERSERVING, setVITAMIN_E_PERSERVING] = useState();
     const [ZINC_PERSERVING, setZINC_PERSERVING] = useState();
     const [SELENIUM_PERSERVING, setSELENIUM_PERSERVING] = useState();
 
+    const [hide_VITAMIN_C, setHidden_VITAMIN_C] = useState(true);
     const [hide_VITAMIN_D, setHidden_VITAMIN_D] = useState(true);
     const [hide_VITAMIN_E, setHidden_VITAMIN_E] = useState(true);
     const [hide_ZINC, setHidden_ZINC] = useState(true);
@@ -511,6 +514,7 @@ function CreateProduct() {
             VITAMIN_B1: VITAMIN_B1,
             VITAMIN_B2: VITAMIN_B2,
             IRON: IRON,
+            VITAMIN_C: VITAMIN_C,
             VITAMIN_D: VITAMIN_D,
             VITAMIN_E: VITAMIN_E,
             ZINC: ZINC,
@@ -533,6 +537,7 @@ function CreateProduct() {
                 VITAMIN_B1: VITAMIN_B1,
                 VITAMIN_B2: VITAMIN_B2,
                 IRON: IRON,
+                VITAMIN_C: VITAMIN_C,
                 VITAMIN_D: VITAMIN_D,
                 VITAMIN_E: VITAMIN_E,
                 ZINC: ZINC,
@@ -560,15 +565,23 @@ function CreateProduct() {
             setVITAMIN_B1_PERSERVING(response.data.VITAMIN_B1.thai_rdi_per_serving)
             setVITAMIN_B2_PERSERVING(response.data.VITAMIN_B2.thai_rdi_per_serving)
             setIRON_PERSERVING(response.data.IRON.thai_rdi_per_serving)
+            setVITAMIN_C_PERSERVING(response.data.VITAMIN_C.thai_rdi_per_serving)
             setVITAMIN_D_PERSERVING(response.data.VITAMIN_D.thai_rdi_per_serving)
             setVITAMIN_E_PERSERVING(response.data.VITAMIN_E.thai_rdi_per_serving)
             setZINC_PERSERVING(response.data.ZINC.thai_rdi_per_serving)
             setSELENIUM_PERSERVING(response.data.SELENIUM.thai_rdi_per_serving)
 
+            var vit_c = response.data.VITAMIN_C.thai_rdi_per_serving
             var vit_d = response.data.VITAMIN_D.thai_rdi_per_serving
             var vit_e = response.data.VITAMIN_E.thai_rdi_per_serving
             var zinc = response.data.ZINC.thai_rdi_per_serving
             var sele = response.data.SELENIUM.thai_rdi_per_serving
+
+            if(vit_c == "-"){
+                setHidden_VITAMIN_C(true)
+            }else{
+                setHidden_VITAMIN_C(false)
+            }
 
             if(vit_d == "-"){
                 setHidden_VITAMIN_D(true)
@@ -1204,6 +1217,24 @@ function CreateProduct() {
                                             </div>
                                         </div>
                                         <div className="create-nutriiton-feild">
+                                            <label>วิตามินซี (Vitamin C)</label>
+                                            <div className="create-nutriiton-feild-input">
+                                                <input 
+                                                    type="text" 
+                                                    onKeyPress={(event) => {
+                                                        if (!/[0-9,.,-]/.test(event.key)) {
+                                                          event.preventDefault();
+                                                        }
+                                                      }
+                                                    }
+                                                    className="create-feild-input" 
+                                                    onChange={(e) => {setVITAMIN_C(e.target.value)}}
+                                                    required 
+                                                />
+                                                <span className="create-feild-unit">มิลลิกรัม</span>
+                                            </div>
+                                        </div>
+                                        <div className="create-nutriiton-feild">
                                             <label>วิตามินดี (Vitamin D)</label>
                                             <div className="create-nutriiton-feild-input">
                                                 <input 
@@ -1501,32 +1532,40 @@ function CreateProduct() {
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="create-label-nutrition-box" hidden={hide_VITAMIN_D}> */}
-                                                    <div className="create-label-nutrition-box" >
+                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_C}>
+                                                    {/* <div className="create-label-nutrition-box" > */}
+                                                        <div className="create-label-layout-flex">
+                                                            <span className="create-label-nutrition-name-element create-label-text-bold" >วิตามินซี</span>
+                                                            <span className="create-label-percentage" >{VITAMIN_C_PERSERVING}</span>
+                                                            <span >%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_D}>
+                                                    {/* <div className="create-label-nutrition-box" > */}
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold" >วิตามินดี</span>
                                                             <span className="create-label-percentage" >{VITAMIN_D_PERSERVING}</span>
                                                             <span >%</span>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="create-label-nutrition-box" hidden={hide_VITAMIN_E}> */}
-                                                    <div className="create-label-nutrition-box">
+                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_E}>
+                                                    {/* <div className="create-label-nutrition-box"> */}
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินอี</span>
                                                             <span className="create-label-percentage">{VITAMIN_E_PERSERVING}</span>
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="create-label-nutrition-box" hidden={hide_ZINC}> */}
-                                                    <div className="create-label-nutrition-box" >
+                                                    <div className="create-label-nutrition-box" hidden={hide_ZINC}>
+                                                    {/* <div className="create-label-nutrition-box" > */}
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">สังกะสี</span>
                                                             <span className="create-label-percentage">{ZINC_PERSERVING}</span>
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    {/* <div className="create-label-nutrition-box" hidden={hide_SELENIUM}> */}
-                                                    <div className="create-label-nutrition-box" >
+                                                    <div className="create-label-nutrition-box" hidden={hide_SELENIUM}>
+                                                    {/* <div className="create-label-nutrition-box" > */}
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">ซีลีเนียม</span>
                                                             <span className="create-label-percentage">{SELENIUM_PERSERVING}</span>
