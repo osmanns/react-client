@@ -300,7 +300,7 @@
 
 /* ! ============================================================================ */
 .create-contrainer-label {
-    width: 500px;
+    width: calc(40%);
     background: #F0F0F0;
 }
 .create-label-product-title {
