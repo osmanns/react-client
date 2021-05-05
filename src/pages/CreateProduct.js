@@ -1501,28 +1501,32 @@ function CreateProduct() {
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_D}>
+                                                    {/* <div className="create-label-nutrition-box" hidden={hide_VITAMIN_D}> */}
+                                                    <div className="create-label-nutrition-box" >
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold" >วิตามินดี</span>
                                                             <span className="create-label-percentage" >{VITAMIN_D_PERSERVING}</span>
                                                             <span >%</span>
                                                         </div>
                                                     </div>
-                                                    <div className="create-label-nutrition-box" hidden={hide_VITAMIN_E}>
+                                                    {/* <div className="create-label-nutrition-box" hidden={hide_VITAMIN_E}> */}
+                                                    <div className="create-label-nutrition-box">
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">วิตามินอี</span>
                                                             <span className="create-label-percentage">{VITAMIN_E_PERSERVING}</span>
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    <div className="create-label-nutrition-box" hidden={hide_ZINC}>
+                                                    {/* <div className="create-label-nutrition-box" hidden={hide_ZINC}> */}
+                                                    <div className="create-label-nutrition-box" >
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">สังกะสี</span>
                                                             <span className="create-label-percentage">{ZINC_PERSERVING}</span>
                                                             <span>%</span>
                                                         </div>
                                                     </div>
-                                                    <div className="create-label-nutrition-box" hidden={hide_SELENIUM}>
+                                                    {/* <div className="create-label-nutrition-box" hidden={hide_SELENIUM}> */}
+                                                    <div className="create-label-nutrition-box" >
                                                         <div className="create-label-layout-flex">
                                                             <span className="create-label-nutrition-name-element create-label-text-bold">ซีลีเนียม</span>
                                                             <span className="create-label-percentage">{SELENIUM_PERSERVING}</span>
